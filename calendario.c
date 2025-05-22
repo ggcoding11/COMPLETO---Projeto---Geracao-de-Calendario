@@ -12,7 +12,7 @@ int main(){
 	printf("Digite sua data de nascimento (DD MM AAAA): ");
 	scanf("%d %d %d", &diaNasc, &mesNasc, &anoNasc);
 	
-	printf("%2d/%2d/%d", diaNasc, mesNasc, anoNasc);
+	printf("%d/%d/%d", diaNasc, mesNasc, anoNasc);
 	
 	
 	return 0;

@@ -8,6 +8,14 @@ void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver);
 void mostrarSigno(int mesNasc, int diaNasc);
 void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNasc, int mesNasc, int anoNiver);
 
+int ehBissexto(int ano){
+	if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
+        return 1; 
+    } else {
+        return 0;
+    }	
+}
+
 int main(){
 	system("color 87");
 	setlocale(LC_ALL, "Portuguese");
@@ -35,13 +43,17 @@ int main(){
 		idade -= 1;
 	} 	
 	
-	printf("\n");
-	
 	int anoNiver = anoAtual;
 	
 	if ((mesAtual > mesNasc) || ((mesAtual == mesNasc) && (diaAtual > diaNasc))){
 		anoNiver++;	
 	}
+	
+	if ((diaNasc == 29 && mesNasc == 02) && (!ehBissexto(anoNiver))){
+		diaNasc--;
+	}
+	
+	printf("\nProximo aniversario: %d/%d/%d\n", diaNasc, mesNasc, anoNiver);
 	
 	printf("Idade: %d\n", idade);
 	
@@ -57,17 +69,7 @@ int main(){
 }
 
 int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mesAtual, int anoAtual){
-	int bissexto = 0;
-	
-	if (anoNasc % 4 == 0){
-		if (anoNasc % 100 == 0){
-			if (anoNasc % 400 == 0){
-				bissexto = 1;
-			}
-		} else {
-			bissexto = 1;
-		}
-	}
+	int bissexto = ehBissexto(anoNasc);
 	
 	if (diaNasc < 1 || mesNasc < 1 || anoNasc < 1){
 		return 1;
@@ -118,11 +120,11 @@ int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mes
 
 int diasNoMes(int mes, int ano) {
     if (mes == 2) { 
-        if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
-            return 29; 
-        } else {
-            return 28;
-        }
+        if (ehBissexto(ano)){
+        	return 29;
+		} else {
+			return 28;
+		}
     }
     
     if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {

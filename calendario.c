@@ -28,8 +28,6 @@ int main(){
 	
 	printf("Idade: %d", idade);
 	
-	//Ver sobre ano bissexto - Como funciona?
-	
 	return 0;
 }
 

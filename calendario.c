@@ -6,7 +6,7 @@ int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mes
 int diasNoMes(int mes, int ano);
 void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver);
 void mostrarSigno(int mesNasc, int diaNasc);
-void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNiver, int mesNiver, int anoNiver);
+void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNasc, int mesNasc, int anoNiver);
 
 int main(){
 	system("color 87");
@@ -169,7 +169,7 @@ void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver){
 	}
 }
 
-void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNiver, int mesNiver, int anoNiver){
+void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNasc, int mesNasc, int anoNiver){
 	struct tm data1 = {0};
 	struct tm data2 = {0};
 	
@@ -177,8 +177,8 @@ void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNiver
 	data1.tm_mon = mesAtual - 1;
 	data1.tm_year = anoAtual - 1900;
 	
-	data2.tm_mday = diaNiver;
-	data2.tm_mon = mesNiver - 1;
+	data2.tm_mday = diaNasc;
+	data2.tm_mon = mesNasc - 1;
 	data2.tm_year = anoNiver - 1900;
 	
 	double diferenca = difftime(mktime(&data2), mktime(&data1));

@@ -5,6 +5,8 @@
 int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mesAtual, int anoAtual);
 int diasNoMes(int mes, int ano);
 void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver);
+void mostrarSigno(int mesNasc, int diaNasc);
+void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNiver, int mesNiver, int anoNiver);
 
 int main(){
 	system("color 87");
@@ -33,11 +35,17 @@ int main(){
 		idade -= 1;
 	} 	
 	
-	printf("Idade: %d\n\n", idade);
-	
-	printf("Calendario do proximo aniversario: \n\n");
+	printf("\n");
 	
 	int anoNiver = anoAtual;
+	
+	printf("Idade: %d\n", idade);
+	
+	mostrarIntervaloDias(diaAtual, mesAtual, anoAtual, diaNasc, mesNasc, anoNiver);
+	
+	mostrarSigno(mesNasc, diaNasc);
+	
+	printf("Calendario do proximo aniversario: \n\n");
 	
 	if ((mesAtual > mesNasc) || ((mesAtual == mesNasc) && (diaAtual > diaNasc))){
 		anoNiver++;	
@@ -161,3 +169,51 @@ void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver){
 	}
 }
 
+void mostrarIntervaloDias(int diaAtual, int mesAtual, int anoAtual, int diaNiver, int mesNiver, int anoNiver){
+	struct tm data1 = {0};
+	struct tm data2 = {0};
+	
+	data1.tm_mday = diaAtual;
+	data1.tm_mon = mesAtual - 1;
+	data1.tm_year = anoAtual - 1900;
+	
+	data2.tm_mday = diaNiver;
+	data2.tm_mon = mesNiver - 1;
+	data2.tm_year = anoNiver - 1900;
+	
+	double diferenca = difftime(mktime(&data2), mktime(&data1));
+	
+	double diasAte = diferenca / (60 * 60 * 24);
+	
+	printf("Quantos dias ate o aniversario?: %.0lf\n", diasAte);
+}
+
+void mostrarSigno(int mesNasc, int diaNasc){
+	printf("Signo: ");
+	
+	if ((diaNasc >= 21 && mesNasc == 3) || (diaNasc <= 19 && mesNasc == 4)) {
+        printf("Áries\n");
+    } else if ((diaNasc >= 20 && mesNasc == 4) || (diaNasc <= 20 && mesNasc == 5)) {
+        printf("Touro\n");
+    } else if ((diaNasc >= 21 && mesNasc == 5) || (diaNasc <= 20 && mesNasc == 6)) {
+        printf("Gêmeos\n");
+    } else if ((diaNasc >= 21 && mesNasc == 6) || (diaNasc <= 22 && mesNasc == 7)) {
+        printf("Câncer\n");
+    } else if ((diaNasc >= 23 && mesNasc == 7) || (diaNasc <= 22 && mesNasc == 8)) {
+        printf("Leão\n");
+    } else if ((diaNasc >= 23 && mesNasc == 8) || (diaNasc <= 22 && mesNasc == 9)) {
+        printf("Virgem\n");
+    } else if ((diaNasc >= 23 && mesNasc == 9) || (diaNasc <= 22 && mesNasc == 10)) {
+        printf("Libra\n");
+    } else if ((diaNasc >= 23 && mesNasc == 10) || (diaNasc <= 21 && mesNasc == 11)) {
+        printf("Escorpião\n");
+    } else if ((diaNasc >= 22 && mesNasc == 11) || (diaNasc <= 21 && mesNasc == 12)) {
+        printf("Sagitário\n");
+    } else if ((diaNasc >= 22 && mesNasc == 12) || (diaNasc <= 19 && mesNasc == 1)) {
+        printf("Capricórnio\n");
+    } else if ((diaNasc >= 20 && mesNasc == 1) || (diaNasc <= 18 && mesNasc == 2)) {
+        printf("Aquário\n");
+    } else {
+        printf("Peixes\n");
+    }
+}

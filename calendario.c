@@ -147,9 +147,9 @@ void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver){
 	
 	for (i = 1; i <= qntdDias; i++){
 		if (i == diaNasc){
-			printf("(%d) ", i);
+		    printf("(%2d)", i);
 		} else {
-			printf("%2d  ", i);	
+		    printf(" %2d ", i);
 		}
 	
 		diaSemana++;

@@ -4,6 +4,8 @@
 
 int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mesAtual, int anoAtual);
 
+void mostrarCalendario(int diaNasc, int mesNasc, int anoAtual);
+
 int main(){
 	system("color 87");
 	setlocale(LC_ALL, "Portuguese");
@@ -31,7 +33,11 @@ int main(){
 		idade -= 1;
 	} 	
 	
-	printf("Idade: %d", idade);
+	printf("Idade: %d\n\n", idade);
+	
+	printf("Calendario do proximo aniversario: \n\n");
+	
+	mostrarCalendario(diaNasc, mesNasc, anoAtual);
 	
 	return 0;
 }
@@ -94,5 +100,29 @@ int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mes
 	}
 	
 	return 0;
+}
+
+void mostrarCalendario(int diaNasc, int mesNasc, int anoAtual){
+	printf("Dom  Seg  Ter  Quar  Quin  Sex\n");
+	
+	struct tm data = {0};
+	
+	data.tm_mday = 01;
+	data.tm_mon = mesNasc - 1;
+	data.tm_year = anoAtual - 1900;
+	
+	mktime(&data);
+	
+	int diaSemana = data.tm_wday;
+	
+	int i;
+	
+	for (i = 0; i < diaSemana; i++){
+		printf("  ");
+	}
+	
+	
+	
+	
 }
 

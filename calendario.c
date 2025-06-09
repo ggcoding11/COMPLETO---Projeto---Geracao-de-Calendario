@@ -151,9 +151,7 @@ void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver){
 		} else {
 			printf("%2d  ", i);	
 		}
-		
-		
-		
+	
 		diaSemana++;
 		
 		if (diaSemana == 7){

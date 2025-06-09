@@ -3,8 +3,8 @@
 #include <time.h>
 
 int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mesAtual, int anoAtual);
-
-void mostrarCalendario(int diaNasc, int mesNasc, int anoAtual);
+int diasNoMes(int mes, int ano);
+void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver);
 
 int main(){
 	system("color 87");
@@ -37,7 +37,13 @@ int main(){
 	
 	printf("Calendario do proximo aniversario: \n\n");
 	
-	mostrarCalendario(diaNasc, mesNasc, anoAtual);
+	int anoNiver = anoAtual;
+	
+	if ((mesAtual > mesNasc) || ((mesAtual == mesNasc) && (diaAtual > diaNasc))){
+		anoNiver++;	
+	}
+	
+	mostrarCalendario(diaNasc, mesNasc, anoNiver);
 	
 	return 0;
 }
@@ -102,27 +108,58 @@ int validarDataNasc(int diaNasc, int mesNasc, int anoNasc, int diaAtual, int mes
 	return 0;
 }
 
-void mostrarCalendario(int diaNasc, int mesNasc, int anoAtual){
-	printf("Dom  Seg  Ter  Quar  Quin  Sex\n");
+int diasNoMes(int mes, int ano) {
+    if (mes == 2) { 
+        if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
+            return 29; 
+        } else {
+            return 28;
+        }
+    }
+    
+    if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+        return 30;
+    }
+    
+    return 31;
+}
+
+void mostrarCalendario(int diaNasc, int mesNasc, int anoNiver){
+	printf(" D   S   T   Q   Q   S   S\n");
 	
 	struct tm data = {0};
 	
 	data.tm_mday = 01;
 	data.tm_mon = mesNasc - 1;
-	data.tm_year = anoAtual - 1900;
+	data.tm_year = anoNiver - 1900;
 	
 	mktime(&data);
 	
 	int diaSemana = data.tm_wday;
 	
+	int qntdDias = diasNoMes(mesNasc, anoNiver);
+	
 	int i;
 	
 	for (i = 0; i < diaSemana; i++){
-		printf("  ");
+		printf("    ");
 	}
 	
-	
-	
-	
+	for (i = 1; i <= qntdDias; i++){
+		if (i == diaNasc){
+			printf("(%d) ", i);
+		} else {
+			printf("%2d  ", i);	
+		}
+		
+		
+		
+		diaSemana++;
+		
+		if (diaSemana == 7){
+			printf("\n");
+			diaSemana = 0;
+		}
+	}
 }
 

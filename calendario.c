@@ -39,6 +39,10 @@ int main(){
 	
 	int anoNiver = anoAtual;
 	
+	if ((mesAtual > mesNasc) || ((mesAtual == mesNasc) && (diaAtual > diaNasc))){
+		anoNiver++;	
+	}
+	
 	printf("Idade: %d\n", idade);
 	
 	mostrarIntervaloDias(diaAtual, mesAtual, anoAtual, diaNasc, mesNasc, anoNiver);
@@ -46,10 +50,6 @@ int main(){
 	mostrarSigno(mesNasc, diaNasc);
 	
 	printf("Calendario do proximo aniversario: \n\n");
-	
-	if ((mesAtual > mesNasc) || ((mesAtual == mesNasc) && (diaAtual > diaNasc))){
-		anoNiver++;	
-	}
 	
 	mostrarCalendario(diaNasc, mesNasc, anoNiver);
 	
